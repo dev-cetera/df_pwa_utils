@@ -1,0 +1,72 @@
+//.title
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
+// source code is governed by an MIT-style license described in the LICENSE
+// file located in this project's root directory.
+//
+// See: https://opensource.org/license/mit
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
+
+import 'package:flutter/widgets.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+typedef PopStateCallback = void Function(String path);
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+@visibleForTesting
+abstract class PlatformNavigatorBase {
+  const PlatformNavigatorBase();
+
+  String? getCurrentPath();
+
+  void pushState(String path);
+
+  void addStateCallback(PopStateCallback callback);
+
+  bool removeStateCallback(PopStateCallback callback);
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+final class PlatformNavigator extends PlatformNavigatorBase {
+  static const i = PlatformNavigator._();
+  const PlatformNavigator._();
+  factory PlatformNavigator() {
+    return i;
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  String? getCurrentPath() {
+    // No-op
+    return null;
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  void pushState(String path) {
+    // No-op
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  void addStateCallback(PopStateCallback callback) {
+    // No-op
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  bool removeStateCallback(PopStateCallback callback) {
+    // No-op
+    return true;
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+PlatformNavigatorBase get platformNavigator => PlatformNavigator();
