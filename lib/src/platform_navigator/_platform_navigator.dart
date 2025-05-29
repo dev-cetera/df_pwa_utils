@@ -14,7 +14,7 @@ import 'package:flutter/widgets.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-typedef PopStateCallback = void Function(String path);
+typedef PopStateCallback = void Function(Uri url);
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -22,9 +22,9 @@ typedef PopStateCallback = void Function(String path);
 abstract class PlatformNavigatorBase {
   const PlatformNavigatorBase();
 
-  String? getCurrentPath();
+  Uri? getCurrentUrl();
 
-  void pushState(String path);
+  void pushState(Uri state);
 
   void addStateCallback(PopStateCallback callback);
 
@@ -42,14 +42,14 @@ final class PlatformNavigator extends PlatformNavigatorBase {
 
   @override
   @pragma('vm:prefer-inline')
-  String? getCurrentPath() {
+  Uri? getCurrentUrl() {
     // No-op
     return null;
   }
 
   @override
   @pragma('vm:prefer-inline')
-  void pushState(String path) {
+  void pushState(Uri state) {
     // No-op
   }
 
