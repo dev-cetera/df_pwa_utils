@@ -1,12 +1,21 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// GENERATED - DO NOT MODIFY BY HAND
-// See: https://github.com/dev-cetera/df_generate_dart_indexes
+// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
+// source code is governed by an MIT-style license described in the LICENSE
+// file located in this project's root directory.
+//
+// See: https://opensource.org/license/mit
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export './normalize_path_query.dart';
-export 'url_strategy/any.dart';
-export 'platform_navigator/any.dart';
+/// No-op implementation for non-web platforms.
+@pragma('vm:prefer-inline')
+void setToUrlPathStrategy(dynamic strategy) {
+  // No-op
+}
+
+class PathUrlStrategy {
+  // No-op
+}

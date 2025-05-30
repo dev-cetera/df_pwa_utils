@@ -10,26 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:flutter/widgets.dart';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-typedef PopStateCallback = void Function(Uri url);
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-@visibleForTesting
-abstract class PlatformNavigatorBase {
-  const PlatformNavigatorBase();
-
-  Uri? getCurrentUrl();
-
-  void replaceState(Uri state);
-
-  void addStateCallback(PopStateCallback callback);
-
-  bool removeStateCallback(PopStateCallback callback);
-}
+import '_platform_navigator_base.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -45,6 +26,12 @@ final class PlatformNavigator extends PlatformNavigatorBase {
   Uri? getCurrentUrl() {
     // No-op
     return null;
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  void pushState(Uri state) {
+    // No-op
   }
 
   @override

@@ -10,4 +10,4 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export '_web_navigator.dart' if (dart.library.io) '_platform_navigator.dart';
+export '_web.dart' if (dart.library.io) '_non_web.dart';

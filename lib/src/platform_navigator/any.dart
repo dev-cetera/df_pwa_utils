@@ -10,12 +10,4 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-/// No-op implementation for non-web platforms.
-@pragma('vm:prefer-inline')
-void setUrlStrategy(dynamic strategy) {
-  // No-op
-}
-
-class PathUrlStrategy {
-  // No-op
-}
+export '_web.dart' if (dart.library.io) '_non_web.dart';

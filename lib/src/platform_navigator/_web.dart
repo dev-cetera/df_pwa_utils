@@ -15,8 +15,8 @@
 import 'dart:async' show StreamSubscription;
 import 'package:web/web.dart' as web;
 
-import '_platform_navigator.dart';
-export '_platform_navigator.dart';
+import '_platform_navigator_base.dart';
+export '_non_web.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -35,6 +35,12 @@ final class WebNavigator implements PlatformNavigatorBase {
   @override
   Uri? getCurrentUrl() {
     return Uri.tryParse(web.window.location.href);
+  }
+
+  @pragma('vm:prefer-inline')
+  @override
+  void pushState(Uri state) {
+    web.window.history.pushState(null, '', state.pathAndQuery);
   }
 
   @pragma('vm:prefer-inline')
@@ -70,11 +76,3 @@ final class WebNavigator implements PlatformNavigatorBase {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 PlatformNavigatorBase get platformNavigator => WebNavigator();
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-extension PathQuery on Uri {
-  String get pathAndQuery {
-    return [path, query].where((e) => e.isNotEmpty).join('?');
-  }
-}

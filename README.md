@@ -26,7 +26,9 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 
 final path = platformNavigator.getCurrentPath(); // e.g. '/home'
 
-platformNavigator.pushState('/home'); // push '/home'
+platformNavigator.pushState('/welcome'); // push '/welcome'
+
+platformNavigator.replaceState('/home'); // replace current state with '/home'
 
 platformNavigator.addStateCallback((path) {
   if (kDebugMode) {
