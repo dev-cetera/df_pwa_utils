@@ -13,7 +13,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 
 import 'dart:async' show StreamSubscription;
-import 'dart:js_interop_unsafe';
 import 'package:web/web.dart' as web;
 
 import '_platform_navigator.dart';
