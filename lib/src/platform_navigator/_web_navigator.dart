@@ -13,6 +13,7 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 
 import 'dart:async' show StreamSubscription;
+import 'dart:js_interop_unsafe';
 import 'package:web/web.dart' as web;
 
 import '_platform_navigator.dart';
@@ -39,8 +40,8 @@ final class WebNavigator implements PlatformNavigatorBase {
 
   @pragma('vm:prefer-inline')
   @override
-  void pushState(Uri state) {
-    web.window.history.pushState(null, '', state.pathAndQuery);
+  void replaceState(Uri state) {
+    web.window.history.replaceState(null, '', state.pathAndQuery);
   }
 
   @override
@@ -48,7 +49,9 @@ final class WebNavigator implements PlatformNavigatorBase {
     _callbacks.add(callback);
     _subscription ??= web.window.onPopState.listen((event) {
       for (final cb in _callbacks) {
-        cb(getCurrentUrl()!);
+        final currentUrl = getCurrentUrl()!;
+        web.window.history.replaceState(null, '', currentUrl.pathAndQuery);
+        cb(currentUrl);
       }
     });
   }

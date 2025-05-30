@@ -24,7 +24,7 @@ abstract class PlatformNavigatorBase {
 
   Uri? getCurrentUrl();
 
-  void pushState(Uri state);
+  void replaceState(Uri state);
 
   void addStateCallback(PopStateCallback callback);
 
@@ -49,7 +49,7 @@ final class PlatformNavigator extends PlatformNavigatorBase {
 
   @override
   @pragma('vm:prefer-inline')
-  void pushState(Uri state) {
+  void replaceState(Uri state) {
     // No-op
   }
 
