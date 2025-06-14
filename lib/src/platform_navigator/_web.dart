@@ -14,6 +14,7 @@
 
 import 'dart:async' show StreamSubscription;
 import 'package:web/web.dart' as web;
+import 'package:flutter_web_plugins/flutter_web_plugins.dart' show urlStrategy;
 
 import '_platform_navigator_base.dart';
 export '_non_web.dart';
@@ -40,13 +41,15 @@ final class WebNavigator implements PlatformNavigatorBase {
   @pragma('vm:prefer-inline')
   @override
   void pushState(Uri state) {
-    web.window.history.pushState(null, '', state.pathAndQuery);
+    final fullPath = urlStrategy?.prepareExternalUrl(state.pathAndQuery) ?? state.pathAndQuery;
+    web.window.history.pushState(null, '', fullPath);
   }
 
   @pragma('vm:prefer-inline')
   @override
   void replaceState(Uri state) {
-    web.window.history.replaceState(null, '', state.pathAndQuery);
+    final fullPath = urlStrategy?.prepareExternalUrl(state.pathAndQuery) ?? state.pathAndQuery;
+    web.window.history.replaceState(null, '', fullPath);
   }
 
   @override
@@ -55,7 +58,9 @@ final class WebNavigator implements PlatformNavigatorBase {
     _subscription ??= web.window.onPopState.listen((event) {
       for (final cb in _callbacks) {
         final currentUrl = getCurrentUrl()!;
-        web.window.history.replaceState(null, '', currentUrl.pathAndQuery);
+        final fullPath =
+            urlStrategy?.prepareExternalUrl(currentUrl.pathAndQuery) ?? currentUrl.pathAndQuery;
+        web.window.history.replaceState(null, '', fullPath);
         cb(currentUrl);
       }
     });
