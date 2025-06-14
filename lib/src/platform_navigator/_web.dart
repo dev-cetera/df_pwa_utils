@@ -32,6 +32,32 @@ final class WebNavigator implements PlatformNavigatorBase {
 
   StreamSubscription<web.PopStateEvent>? _subscription;
 
+  @override
+  Uri stripBaseHref(Uri url) {
+    final baseHref = _getBaseHref();
+    if (baseHref == '/') {
+      return url;
+    }
+
+    final path = url.path;
+    if (path.startsWith(baseHref)) {
+      var newPath = path.substring(baseHref.length - 1);
+      if (!newPath.startsWith('/')) {
+        newPath = '/$newPath';
+      }
+      return url.replace(path: newPath);
+    }
+
+    return url;
+  }
+
+  String _getBaseHref() {
+    final baseElement = web.window.document.querySelector('base');
+    final baseHref = baseElement?.getAttribute('href');
+    if (baseHref == null || baseHref.isEmpty) return '/';
+    return baseHref.startsWith('/') && baseHref.endsWith('/') ? baseHref : '/';
+  }
+
   @pragma('vm:prefer-inline')
   @override
   Uri? getCurrentUrl() {

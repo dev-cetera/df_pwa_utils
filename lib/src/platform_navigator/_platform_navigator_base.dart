@@ -17,6 +17,8 @@ typedef PopStateCallback = void Function(Uri url);
 abstract class PlatformNavigatorBase {
   const PlatformNavigatorBase();
 
+  Uri stripBaseHref(Uri url);
+
   Uri? getCurrentUrl();
 
   void pushState(Uri state);

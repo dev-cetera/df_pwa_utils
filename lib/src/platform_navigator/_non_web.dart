@@ -23,6 +23,12 @@ final class PlatformNavigator extends PlatformNavigatorBase {
 
   @override
   @pragma('vm:prefer-inline')
+  Uri stripBaseHref(Uri url) {
+    return url;
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   Uri? getCurrentUrl() {
     // No-op
     return null;
@@ -49,7 +55,6 @@ final class PlatformNavigator extends PlatformNavigatorBase {
   @override
   @pragma('vm:prefer-inline')
   bool removeStateCallback(PopStateCallback callback) {
-    // No-op
     return true;
   }
 }
