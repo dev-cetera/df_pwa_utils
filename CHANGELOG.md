@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.2]
+
+- Released @ 6/2025 (UTC)
+- feat: Add stripBaseHref
+
 ## [0.3.1]
 
 - Released @ 5/2025 (UTC)
