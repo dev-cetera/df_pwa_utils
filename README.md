@@ -3,8 +3,13 @@
 
 Dart & Flutter Packages by dev-cetera.com & contributors.
 
-[![pub package](https://img.shields.io/pub/v/df_web_utils.svg)](https://pub.dev/packages/df_web_utils)
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/dev-cetera/df_web_utils/main/LICENSE)
+[![pub](https://img.shields.io/pub/v/df_pwa_utils.svg)](https://pub.dev/packages/df_pwa_utils)
+[![tag](https://img.shields.io/badge/tag-v0.3.2-purple)](https://github.com/dev-cetera/df_pwa_utils/tree/v0.3.2)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dev-cetera/df_pwa_utils/main/LICENSE)
+
+---
+
+<!-- BEGIN _README_CONTENT -->
 
 ## Summary
 
@@ -57,6 +62,12 @@ dependencies:
       ref: main
 ```
 
+<!-- END _README_CONTENT -->
+
+---
+
+Please refer to the [API reference](https://pub.dev/documentation/df_pwa_utils/) for more information.
+
 ---
 
 ## Contributing and Discussions
@@ -84,4 +95,5 @@ If you're enjoying this package and find it valuable, consider showing your appr
 
 ## License
 
-This project is released under the MIT License. See [LICENSE](https://raw.githubusercontent.com/dev-cetera/df_web_utils/main/LICENSE) for more information.
+This project is released under the [MIT License](https://raw.githubusercontent.com/dev-cetera/df_pwa_utils/main/LICENSE). See [LICENSE](https://raw.githubusercontent.com/dev-cetera/df_pwa_utils/main/LICENSE) for more information.
+
