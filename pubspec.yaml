@@ -16,7 +16,7 @@ repository: https://github.com/robmllze/df_pwa_utils
 funding:
   - https://www.buymeacoffee.com/dev_cetera
 description: Web utilities for progressive web applications (PWA). No-ops on non-web platforms.
-version: 0.3.2
+version: 0.3.3
 topics:
   - path-strategy
   - web
