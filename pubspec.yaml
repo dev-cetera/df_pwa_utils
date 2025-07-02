@@ -14,7 +14,9 @@ name: df_pwa_utils
 homepage: https://dev-cetera.com/
 repository: https://github.com/robmllze/df_pwa_utils
 funding:
-  - https://www.buymeacoffee.com/dev_cetera
+- https://www.buymeacoffee.com/dev_cetera
+- https://www.patreon.com/c/RobertMollentze
+- https://github.com/sponsors/robmllze
 description: Web utilities for progressive web applications (PWA). No-ops on non-web platforms.
 version: 0.3.3
 topics:
