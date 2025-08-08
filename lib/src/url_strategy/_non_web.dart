@@ -13,7 +13,7 @@
 
 /// No-op implementation for non-web platforms.
 @pragma('vm:prefer-inline')
-void setToUrlPathStrategy(dynamic strategy) {
+void setToUrlPathStrategy() {
   // No-op
 }
 
