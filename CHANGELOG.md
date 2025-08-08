@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.5]
+
+- Released @ 8/2025 (UTC)
+- Compatibility bugfix
+
 ## [0.3.3]
 
 - Released @ 6/2025 (UTC)
