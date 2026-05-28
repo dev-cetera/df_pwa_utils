@@ -56,7 +56,7 @@ final class PlatformNavigator extends PlatformNavigatorBase {
   @override
   @pragma('vm:prefer-inline')
   bool removeStateCallback(PopStateCallback callback) {
-    return true;
+    return false;
   }
 }
 

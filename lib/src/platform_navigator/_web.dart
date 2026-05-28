@@ -41,9 +41,11 @@ final class WebNavigator implements PlatformNavigatorBase {
     }
 
     final path = url.path;
-    if (path.startsWith(baseHref)) {
+    // Match only on segment boundaries: baseHref always ends with '/'.
+    if (path == baseHref.substring(0, baseHref.length - 1) ||
+        path.startsWith(baseHref)) {
       var newPath = path.substring(baseHref.length - 1);
-      if (!newPath.startsWith('/')) {
+      if (newPath.isEmpty || !newPath.startsWith('/')) {
         newPath = '/$newPath';
       }
       return url.replace(path: newPath);
@@ -54,9 +56,17 @@ final class WebNavigator implements PlatformNavigatorBase {
 
   String _getBaseHref() {
     final baseElement = web.window.document.querySelector('base');
-    final baseHref = baseElement?.getAttribute('href');
-    if (baseHref == null || baseHref.isEmpty) return '/';
-    return baseHref.startsWith('/') && baseHref.endsWith('/') ? baseHref : '/';
+    final raw = baseElement?.getAttribute('href');
+    if (raw == null || raw.isEmpty) return '/';
+    // Strip scheme/host if `href` is absolute (e.g. "https://x.com/app/").
+    var href = raw;
+    final parsed = Uri.tryParse(raw);
+    if (parsed != null && parsed.hasScheme) {
+      href = parsed.path.isEmpty ? '/' : parsed.path;
+    }
+    if (!href.startsWith('/')) href = '/$href';
+    if (!href.endsWith('/')) href = '$href/';
+    return href;
   }
 
   @pragma('vm:prefer-inline')
@@ -87,14 +97,21 @@ final class WebNavigator implements PlatformNavigatorBase {
   void addStateCallback(PopStateCallback callback) {
     _callbacks.add(callback);
     _subscription ??= web.window.onPopState.listen((event) {
-      for (final cb in _callbacks) {
-        final currentUrl = getCurrentUrl()!;
-        final fullPath =
-            urlStrategy?.prepareExternalUrl(currentUrl.pathAndQuery) ??
-            currentUrl.pathAndQuery;
-        web.window.history.replaceState(null, '', fullPath);
-        cb(currentUrl);
+      final currentUrl = getCurrentUrl();
+      if (currentUrl == null) return;
+      final stripped = stripBaseHref(currentUrl);
+      final appRelativeUri = Uri(
+        path: stripped.path,
+        query: stripped.query.isEmpty ? null : stripped.query,
+        fragment: stripped.fragment.isEmpty ? null : stripped.fragment,
+      );
+      for (final cb in _callbacks.toList()) {
+        cb(appRelativeUri);
       }
+      final fullPath =
+          urlStrategy?.prepareExternalUrl(appRelativeUri.pathAndQuery) ??
+          appRelativeUri.pathAndQuery;
+      web.window.history.replaceState(null, '', fullPath);
     });
   }
 

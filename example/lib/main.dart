@@ -11,31 +11,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-typedef PopStateCallback = void Function(Uri url);
+//import 'package:dart_package_template/dart_package_template.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class PlatformNavigatorBase {
-  const PlatformNavigatorBase();
-
-  Uri stripBaseHref(Uri url);
-
-  Uri? getCurrentUrl();
-
-  void pushState(Uri state);
-
-  void replaceState(Uri state);
-
-  void addStateCallback(PopStateCallback callback);
-
-  bool removeStateCallback(PopStateCallback callback);
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-extension PathQuery on Uri {
-  String get pathAndQuery {
-    final base = [path, query].where((e) => e.isNotEmpty).join('?');
-    return fragment.isEmpty ? base : '$base#$fragment';
-  }
+void main() {
+  print('Hello World!');
 }
