@@ -78,8 +78,7 @@ final class WebNavigator implements PlatformNavigatorBase {
   @pragma('vm:prefer-inline')
   @override
   void pushState(Uri state) {
-    final fullPath =
-        urlStrategy?.prepareExternalUrl(state.pathAndQuery) ??
+    final fullPath = urlStrategy?.prepareExternalUrl(state.pathAndQuery) ??
         state.pathAndQuery;
     web.window.history.pushState(null, '', fullPath);
   }
@@ -87,8 +86,7 @@ final class WebNavigator implements PlatformNavigatorBase {
   @pragma('vm:prefer-inline')
   @override
   void replaceState(Uri state) {
-    final fullPath =
-        urlStrategy?.prepareExternalUrl(state.pathAndQuery) ??
+    final fullPath = urlStrategy?.prepareExternalUrl(state.pathAndQuery) ??
         state.pathAndQuery;
     web.window.history.replaceState(null, '', fullPath);
   }
@@ -110,7 +108,7 @@ final class WebNavigator implements PlatformNavigatorBase {
       }
       final fullPath =
           urlStrategy?.prepareExternalUrl(appRelativeUri.pathAndQuery) ??
-          appRelativeUri.pathAndQuery;
+              appRelativeUri.pathAndQuery;
       web.window.history.replaceState(null, '', fullPath);
     });
   }

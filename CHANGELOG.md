@@ -1,36 +1,10 @@
 # Changelog
 
-## [0.3.5]
+## [0.4.0]
 
-- Released @ 8/2025 (UTC)
-- Compatibility bugfix
-
-## [0.3.3]
-
-- Released @ 6/2025 (UTC)
-- Update dependencies
-
-## [0.3.2]
-
-- Released @ 6/2025 (UTC)
-- feat: Add stripBaseHref
-
-## [0.3.1]
-
-- Released @ 5/2025 (UTC)
-- update: Clean up and refactor
-
-## [0.3.0]
-
-- Released @ 5/2025 (UTC)
-- breaking: Updates
-
-## [0.2.0]
-
-- Released @ 5/2025 (UTC)
-- breaking: Updates to work with df_router
-
-## [0.1.0]
-
-- Released @ 5/2025 (UTC)
-- Inital commit
+- breaking: `WebNavigator.onPopState` invokes callbacks with the app-relative `Uri` (base href stripped) instead of the raw URL.
+- breaking: `Uri.pathAndQuery` extension now includes the fragment when present.
+- fix: `<base href>` resolution handles absolute URLs (with scheme/host) and missing leading/trailing slashes.
+- fix: `stripBaseHref` matches when the path equals the base href without its trailing slash.
+- fix: `PlatformNavigator.removeStateCallback` on non-web now returns `false` (was incorrectly returning `true`).
+- perf: `WebNavigator` pop-state handler calls `replaceState` once per pop instead of once per registered callback.

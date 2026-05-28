@@ -13,53 +13,75 @@
 
 ## Summary
 
-Web utilities for progressive web applications (PWA). No-ops on non-web platforms. Works with WASM.
+Small Flutter utilities for progressive web apps. Everything no-ops on
+non-web platforms (including WASM), so you can call it unconditionally
+from cross-platform code:
 
-You can use this package to set the URL path strategy for your web application to use the standard URL path instead of the hash-based routing.
+- **`setToUrlPathStrategy()`** — switches Flutter to the standard
+  `PathUrlStrategy` so URLs look like `/home` instead of `/#/home`.
+  Safe to call repeatedly; swallows the "already set" error from hot
+  reload.
+- **`platformNavigator`** — singleton that wraps `window.history` and
+  `popstate` for pushing/replacing the URL and listening for back/forward
+  navigation. All paths are routed through Flutter's installed
+  `UrlStrategy`, and `<base href="...">` is stripped from popped URLs.
+- **`normalizePathQuery()`** — extracts and tidies the path + query from
+  any URL string: strips the trailing slash, drops the fragment, and
+  returns `null` for empty input.
+
+## Installation
+
+```sh
+flutter pub add df_pwa_utils
+```
+
+## Usage
+
+### Set the URL path strategy
+
+Call once before `runApp` to remove the `#` from URLs on web:
 
 ```dart
-import 'package:df_web_utils/df_web_utils.dart';
+import 'package:df_pwa_utils/df_pwa_utils.dart';
 
-setToUrlPathStrategy();
+void main() {
+  setToUrlPathStrategy();
+  runApp(const MyApp());
+}
 ```
 
-You can also use the `platformNavigator` to manage the browser history and listen for changes in the URL path.
+### Navigate with `platformNavigator`
 
 ```dart
-import 'package:df_web_utils/df_web_utils.dart';
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:df_pwa_utils/df_pwa_utils.dart';
 
-final path = platformNavigator.getCurrentPath(); // e.g. '/home'
+// Read the current URL (null on non-web).
+final url = platformNavigator.getCurrentUrl();
 
-platformNavigator.pushState('/welcome'); // push '/welcome'
+// Push or replace history entries.
+platformNavigator.pushState(Uri.parse('/welcome'));
+platformNavigator.replaceState(Uri.parse('/home'));
 
-platformNavigator.replaceState('/home'); // replace current state with '/home'
+// React to browser back/forward.
+void onPop(Uri url) {
+  // url is app-relative (base href stripped, fragment preserved).
+  debugPrint('Popped to: ${url.path}');
+}
+platformNavigator.addStateCallback(onPop);
 
-platformNavigator.addStateCallback((path) {
-  if (kDebugMode) {
-    print('Pop state: $path');
-  } // e.g. '/home'
-});
-
+// Stop listening; the underlying popstate subscription is cancelled
+// automatically once the last callback is removed.
+platformNavigator.removeStateCallback(onPop);
 ```
 
-## Getting Started
+### Normalize a path + query
 
-Add the package to your `pubspec.yaml:
-
-```yaml
-dependencies:
-  df_pwa_utils: ^0.1.0
-```
-
-You can also use the latest version from the Git repository:
-
-```yaml
-dependencies:
-  df_pwa_utils:
-    git:
-      url: https://github.com/dev-cetera/df_pwa_utils
-      ref: main
+```dart
+normalizePathQuery('/home/');                       // '/home'
+normalizePathQuery('/search/?q=hello');             // '/search?q=hello'
+normalizePathQuery('https://example.com/x?id=42');  // '/x?id=42'
+normalizePathQuery('/docs#section');                // '/docs'
+normalizePathQuery('');                             // null
 ```
 
 <!-- END _README_CONTENT -->
