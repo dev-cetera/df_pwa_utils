@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.1]
+
+- feat: `setToUrlHashStrategy()` for opting back into `'/#/...'` URLs on static hosts; no-op on non-web.
+
 ## [0.4.0]
 
 - breaking: `WebNavigator.onPopState` invokes callbacks with the app-relative `Uri` (base href stripped) instead of the raw URL.

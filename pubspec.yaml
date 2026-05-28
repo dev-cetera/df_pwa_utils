@@ -19,7 +19,7 @@ funding:
   - https://www.patreon.com/c/robelator
   - https://github.com/sponsors/robelator
 description: Web utilities for progressive web applications (PWA). No-ops on non-web platforms.
-version: 0.4.0
+version: 0.4.1
 topics:
   - path-strategy
   - web

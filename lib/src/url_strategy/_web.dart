@@ -30,3 +30,20 @@ void setToUrlPathStrategy() {
     }
   }
 }
+
+/// Initializes the URL hash strategy for the application.
+///
+/// On web platforms, it sets the [HashUrlStrategy] so URLs look like
+/// '/#/home'. This is useful for static hosts where server-side routing
+/// for clean paths is not available. On non-web platforms, it performs
+/// a no-op.
+@pragma('vm:prefer-inline')
+void setToUrlHashStrategy() {
+  if (kIsWeb) {
+    try {
+      setUrlStrategy(const HashUrlStrategy());
+    } catch (_) {
+      // Ignore errors during hot reloading since setUrlStrategy can only be set once.
+    }
+  }
+}

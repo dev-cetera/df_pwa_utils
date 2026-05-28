@@ -17,6 +17,16 @@ void setToUrlPathStrategy() {
   // No-op
 }
 
+/// No-op implementation for non-web platforms.
+@pragma('vm:prefer-inline')
+void setToUrlHashStrategy() {
+  // No-op
+}
+
 class PathUrlStrategy {
   // No-op
+}
+
+class HashUrlStrategy {
+  const HashUrlStrategy();
 }
