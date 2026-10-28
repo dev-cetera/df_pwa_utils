@@ -15,7 +15,7 @@ name: df_pwa_utils
 homepage: https://dev-cetera.com/
 repository: https://github.com/dev-cetera/df_pwa_utils
 description: Web utilities for progressive web applications (PWA). No-ops on non-web platforms.
-version: 0.5.1
+version: 0.5.2
 topics:
   - path-strategy
   - web
